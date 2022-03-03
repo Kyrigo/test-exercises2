@@ -127,9 +127,9 @@ internal class Program
             Console.WriteLine("Ошибка в аргументах");
             switch (e)
             {
-                //case FormatException _:
-                //    Console.WriteLine("Format Exception - разрешен только ввод чисел");
-                //    break;
+                case FormatException _:
+                    Console.WriteLine("Format Exception - разрешен только ввод чисел");
+                    break;
                 case OverflowException _:
                     Console.WriteLine("Overflow Exception - число слишком большое");
                     break;
