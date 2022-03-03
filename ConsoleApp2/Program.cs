@@ -12,7 +12,7 @@ internal class Program
             int Max = 100;
             do
             {
-                Console.WriteLine("Выберите программу\n[1].Вывод массива случайных чисел\n[2]Вывод минимальных значений матрицы\n[3]Калькулятор");
+                Console.WriteLine("Выберите программу\n[1]Вывод массива случайных чисел\n[2]Вывод минимальных значений матрицы\n[3]Калькулятор");
                 selection = int.Parse(Console.ReadLine());
             } while (selection < 0 || selection > 3);
 
