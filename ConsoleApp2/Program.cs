@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp2;
+﻿using System.Globalization;
+
+namespace ConsoleApp2;
 
 internal class Program
 {
@@ -75,16 +77,16 @@ internal class Program
                     Console.WriteLine("Готовый массив минимальных значений по убыванию: {0}", minArrayString);
                     break;
                 case 3:
-                    float num1; float num2;
+                    float num1, num2, result;
                     
                     Console.WriteLine("Калькулятор\r");
                     Console.WriteLine("------------------------\n");
                     
                     Console.WriteLine("Введите первое число");
-                    num1 = float.Parse(Console.ReadLine().Replace(".", ","));
+                    num1 = float.Parse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture);
 
                     Console.WriteLine("Введите второе число");
-                    num2 = float.Parse(Console.ReadLine().Replace(".", ","));
+                    num2 = float.Parse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture);
 
                     Console.WriteLine("Выберите операцию:");
                     Console.WriteLine("\ta - Сложение");
@@ -95,13 +97,16 @@ internal class Program
                     switch (Console.ReadLine())
                     {
                         case "a":
-                            Console.WriteLine($"Результат: {num1} + {num2} = " + Math.Round(num1 + num2, 3));
+                            result = num1 + num2;
+                            Console.WriteLine($"Результат: {result:0.##}");
                             break;
                         case "s":
-                            Console.WriteLine($"Результат: {num1} - {num2} = " + Math.Round(num1 - num2, 3));
+                            result = num1 - num2;
+                            Console.WriteLine($"Результат: {result:0.##}");
                             break;
                         case "m":
-                            Console.WriteLine($"Результат: {num1} * {num2} = " + Math.Round(num1 * num2, 3));
+                            result = num1 * num2;
+                            Console.WriteLine($"Результат: {result:0.##}");
                             break;
                         case "d":
                             while (num2 == 0)
@@ -109,7 +114,9 @@ internal class Program
                                 Console.WriteLine("Деление на ноль невозможно. Введите другое число: ");
                                 num2 = Convert.ToInt32(Console.ReadLine());
                             }
-                            Console.WriteLine($"Результат: {num1} / {num2} = " + Math.Round(num1 / num2, 3));
+
+                            result = num1 / num2;
+                            Console.WriteLine($"Результат: {result:0.##}");
                             break;
                     }
                     break;
@@ -120,9 +127,9 @@ internal class Program
             Console.WriteLine("Ошибка в аргументах");
             switch (e)
             {
-                case FormatException _:
-                    Console.WriteLine("Format Exception - разрешен только ввод чисел");
-                    break;
+                //case FormatException _:
+                //    Console.WriteLine("Format Exception - разрешен только ввод чисел");
+                //    break;
                 case OverflowException _:
                     Console.WriteLine("Overflow Exception - число слишком большое");
                     break;
