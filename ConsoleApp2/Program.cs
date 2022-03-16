@@ -22,7 +22,11 @@ internal class Program
             {
                 case 1:
                     Console.WriteLine("Введите длину массива: ");
-                    var ml = int.Parse(Console.ReadLine());
+                    var ml = 0;
+                    while (!int.TryParse(Console.ReadLine(), out ml) || ml <= 0)
+                    {
+                        Console.WriteLine("Введите позитивное число");
+                    }
 
                     Console.WriteLine($"Генерация массива длинной {ml}...");
                     var numbers = Enumerable.Repeat(rnd.Next(Min, Max), ml).ToArray();
@@ -35,9 +39,17 @@ internal class Program
                     break;
                 case 2:
                     Console.WriteLine("Введите длину массива:");
-                    var m = int.Parse(Console.ReadLine());
+                    var m = 0;
+                    while (!int.TryParse(Console.ReadLine(), out m) || m <= 0)
+                    {
+                        Console.WriteLine("Введите позитивное число");
+                    }
                     Console.WriteLine("Введите высоту массива: ");
-                    var n = int.Parse(Console.ReadLine());
+                    var n = 0;
+                    while (!int.TryParse(Console.ReadLine(), out n) || n <= 0)
+                    {
+                        Console.WriteLine("Введите позитивное число");
+                    }
 
                     Console.WriteLine("Генерация многомерного массива [{0}][{1}]...", m, n);
                     var randomArray = new int[m, n];
@@ -46,9 +58,17 @@ internal class Program
                         for (int j = 0; j < n; j++)
                         {
                             randomArray[i, j] = rnd.Next(Min, Max);
-                            //Console.Write(randomArray[i,j]+"\t");
                         }
-                        //Console.WriteLine("\n");
+                    }
+
+                    Console.WriteLine("Сгенерированный массив: ");
+                    for (var i = 0; i < randomArray.GetLength(0); i++)
+                    {
+                        for (var j = 0; j < randomArray.GetLength(1); j++)
+                        {
+                            Console.Write(randomArray[i, j] + "\t");
+                        }
+                        Console.WriteLine("\n");
                     }
 
                     Console.WriteLine("Выбираем минимальные значения и сортируем...");
@@ -82,7 +102,7 @@ internal class Program
                         "-" => num1 - num2,
                         "*" => num1 * num2,
                         "/" when num2 != 0 => num1 / num2,
-                        "/" when num2 == 0 => float.NaN,
+                        "/" when num2 == 0 => float.NaN, 
                         _ => throw new Exception("Неизвестная операция"),
                     };
                     Console.WriteLine($"Результат: {result:0.##}");
