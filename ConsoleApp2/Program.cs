@@ -23,51 +23,35 @@ internal class Program
                 case 1:
                     Console.WriteLine("Введите длину массива: ");
                     var ml = 0;
-                    while (!int.TryParse(Console.ReadLine(), out ml) || ml <= 0)
-                    {
-                        Console.WriteLine("Введите позитивное число");
-                    }
+                    while (!int.TryParse(Console.ReadLine(), out ml) || ml <= 0) Console.WriteLine("Введите позитивное число");
 
                     Console.WriteLine($"Генерация массива длинной {ml}...");
                     var numbers = Enumerable.Repeat(rnd.Next(Min, Max), ml).ToArray();
                     Console.WriteLine("Генерация завершена");
                     Console.WriteLine($"Готовый массив:\n ({string.Join(",", numbers)})");
-                    
+
                     Console.WriteLine("Введите число: ");
                     var num = int.Parse(Console.ReadLine());
-                    Console.WriteLine($"Число {num} {(numbers.Contains(num) ? "есть" : "отсутствует")} в массиве", num);
+                    Console.WriteLine(numbers.Contains(num) ? "Yes" : "No");
                     break;
                 case 2:
+                    var m = 0; //если добавляю var после out и убираю эту инициализацию, переменную перестает видеть остальной код
                     Console.WriteLine("Введите длину массива:");
-                    var m = 0;
-                    while (!int.TryParse(Console.ReadLine(), out m) || m <= 0)
-                    {
-                        Console.WriteLine("Введите позитивное число");
-                    }
+                    while (!int.TryParse(Console.ReadLine(), out m) || m <= 0) Console.WriteLine("Введите позитивное число");
                     Console.WriteLine("Введите высоту массива: ");
                     var n = 0;
-                    while (!int.TryParse(Console.ReadLine(), out n) || n <= 0)
-                    {
-                        Console.WriteLine("Введите позитивное число");
-                    }
+                    while (!int.TryParse(Console.ReadLine(), out n) || n <= 0) Console.WriteLine("Введите позитивное число");
 
                     Console.WriteLine("Генерация многомерного массива [{0}][{1}]...", m, n);
                     var randomArray = new int[m, n];
-                    for (int i = 0; i < m; i++)
-                    {
-                        for (int j = 0; j < n; j++)
-                        {
-                            randomArray[i, j] = rnd.Next(Min, Max);
-                        }
-                    }
+                    for (var i = 0; i < m; i++)
+                    for (var j = 0; j < n; j++)
+                        randomArray[i, j] = rnd.Next(Min, Max);
 
                     Console.WriteLine("Сгенерированный массив: ");
                     for (var i = 0; i < randomArray.GetLength(0); i++)
                     {
-                        for (var j = 0; j < randomArray.GetLength(1); j++)
-                        {
-                            Console.Write(randomArray[i, j] + "\t");
-                        }
+                        for (var j = 0; j < randomArray.GetLength(1); j++) Console.Write(randomArray[i, j] + "\t");
                         Console.WriteLine("\n");
                     }
 
@@ -79,10 +63,10 @@ internal class Program
                     Console.WriteLine($"Готовый массив минимальных значений по убыванию: {string.Join(", ", minArray)}");
                     break;
                 case 3:
-                    
+
                     Console.WriteLine("Калькулятор\r");
                     Console.WriteLine("------------------------\n");
-                    
+
                     Console.WriteLine("Введите первое число");
                     var num1 = float.Parse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture);
 
@@ -102,12 +86,12 @@ internal class Program
                         "-" => num1 - num2,
                         "*" => num1 * num2,
                         "/" when num2 != 0 => num1 / num2,
-                        "/" when num2 == 0 => float.NaN, 
-                        _ => throw new Exception("Неизвестная операция"),
+                        "/" when num2 == 0 => float.NaN,
+                        _ => throw new Exception("Неизвестная операция")
                     };
                     Console.WriteLine($"Результат: {result:0.##}");
                     break;
-                    }
+            }
         }
         catch (Exception e)
         {
